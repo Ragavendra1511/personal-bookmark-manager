@@ -1882,8 +1882,9 @@ class BookmarkManager {
                 password: password
             });
             
-            // Test connection by trying to list directory contents
-            await testClient.getDirectoryContents('/');
+            // Test connection by trying to get server info (PROPFIND on root)
+            // pCloud WebDAV doesn't support listing root directory, so we use a different approach
+            await testClient.stat('/');
             
             this.showToast('WebDAV connection successful!', 'success');
             
